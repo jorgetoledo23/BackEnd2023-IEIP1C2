@@ -16,9 +16,9 @@ namespace WebApplication1.Controllers
             _logger = logger;
         }
 
-        public int Index(Departamento D)
+        public IActionResult Index()
         {
-           return contador++; 
+           return View(); 
         }
 
         public IActionResult Privacy()

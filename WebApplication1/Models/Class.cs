@@ -22,7 +22,7 @@
                 return "asdasd";
             }
 
-            return false;
+            return "asdasd";
 
         }
 
