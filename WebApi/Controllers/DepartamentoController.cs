@@ -41,5 +41,37 @@ namespace WebApi.Controllers
             return Ok(contextInterno.TblDepartamentos.ToList());
         }
 
+        [HttpPut]
+        [Route("uptdpto")]
+        public IActionResult uptdpto(Departamento dpto)
+        {
+            //Select * From tblDepartamentos Where cod_dpto == cod
+            var depa = contextInterno.TblDepartamentos
+                .Where(x => x.Cod_Dpto == dpto.Cod_Dpto).FirstOrDefault();
+            if(depa == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                depa.Nombre = dpto.Nombre;
+                contextInterno.Update(depa);
+                contextInterno.SaveChanges();
+                return Ok();
+            }
+        }
+
+        [HttpDelete]
+        [Route("deldpto")]
+        public IActionResult deldpto(int id)
+        {
+            var depa = contextInterno.TblDepartamentos
+                .Where(x => x.Cod_Dpto == id).FirstOrDefault();
+            if (depa == null) return BadRequest();
+            contextInterno.Remove(depa);
+            contextInterno.SaveChanges();
+            return Ok();
+        }
+
     }
 }
