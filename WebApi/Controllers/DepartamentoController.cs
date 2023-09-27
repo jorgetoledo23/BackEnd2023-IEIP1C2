@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApi.Model;
 
 namespace WebApi.Controllers
@@ -72,6 +73,43 @@ namespace WebApi.Controllers
             contextInterno.SaveChanges();
             return Ok();
         }
+
+        [HttpGet]
+        [Route("getByCod")]
+        public async Task<IActionResult> getByCod(int id)
+        {
+            //Query para buscar Dpto segun su Cod
+            var dpto = await contextInterno.TblDepartamentos
+                .Where(x => x.Cod_Dpto == id)
+                .FirstOrDefaultAsync();
+            if (dpto == null) return NotFound();
+            return Ok(dpto);        
+        }
+
+        [HttpGet]
+        [Route("getByName")]
+        public async Task<IActionResult> getByName(string name)
+        {
+            if (string.IsNullOrEmpty(name)) return NotFound();
+            var dpto = contextInterno.TblDepartamentos
+                .FirstOrDefault(x => x.Nombre == name);
+            if(dpto == null) return NotFound();
+            return Ok(dpto);
+        }
+
+        [HttpGet]
+        [Route("getByStartWith")]
+        public async Task<IActionResult> getByStartWith(string key)
+        {
+            if (string.IsNullOrEmpty(key)) return NotFound();
+            var dptos = await contextInterno.TblDepartamentos
+                .Where(x => x.Nombre.StartsWith(key))
+                .ToListAsync();
+            if (dptos == null) return NotFound();
+            return Ok(dptos);
+        }
+
+
 
     }
 }
