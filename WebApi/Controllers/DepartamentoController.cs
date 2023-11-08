@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Model;
@@ -7,6 +8,7 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Free, Premium")]
     public class DepartamentoController : ControllerBase
     {
         //Agregar Dptos
@@ -36,6 +38,7 @@ namespace WebApi.Controllers
 
         [HttpGet]
         [Route("getdptos")]
+        [AllowAnonymous]
         public IActionResult getDptos()
         {
             //Select * From TblDepartamentos

@@ -12,6 +12,7 @@ namespace WebApi.Model
         public DbSet<Trabajador> TblTrabajadores { get; set; }
         public DbSet<ContactoEmergencia> TblContactosEmergencia { get; set; }
         public DbSet<CargaFamiliar> TblCargas { get; set; }
+        public DbSet<Usuario> TblUsuarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
