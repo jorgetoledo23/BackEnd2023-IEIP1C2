@@ -1,0 +1,35 @@
+﻿@model IEnumerable<WebApp.Models.Categoria>
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+        <a class="btn btn-outline-success" asp-action="Create"><i class="bi bi-plus-circle mx-2"></i>Agregar Nueva Categoria</a>
+</p>
+
+<div class="row justify-content-start">
+    @foreach (var item in Model)
+    {
+        <div class="card text-center m-2" style="width: 18rem;">
+            <img src="@item.UrlImagen" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">@item.Nombre</h5>
+                    <i class="bi bi-pencil-square"></i>
+                    <i class="bi bi-pencil-square"></i>
+            </div>
+        </div>
+    }
+</div>
+
+
+</body>
+</html>
