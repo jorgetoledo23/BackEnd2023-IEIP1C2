@@ -34,5 +34,39 @@ namespace WebApp.Controllers
             return View(categoria);
         }
 
+        public IActionResult EditarCategoria(string IdCategoria)
+        {
+            var cat = db.TblCategorias.Find(Convert.ToInt32(IdCategoria));
+            if(cat == null) return NotFound();
+
+            return View(cat);
+        }
+
+        [HttpPost]
+        public IActionResult EditarCategoria(Categoria C)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Update(C);
+                db.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(C);
+            
+        }
+
+        public IActionResult EliminarCategoria(int IdCategoria)
+        {
+            var cat = db.TblCategorias.Find(IdCategoria);
+            if (cat == null) return NotFound();
+            db.Remove(cat);
+            db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
+
+
     }
 }

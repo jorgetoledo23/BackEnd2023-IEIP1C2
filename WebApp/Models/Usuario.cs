@@ -33,7 +33,8 @@ namespace WebApp.Models
     
         [ForeignKey("Categoria")]
         public int IdCategoria { get; set; }
-        public Categoria Categoria { get; set; }
+        public Categoria? Categoria { get; set; }
+        public List<Imagen> Imagenes { get; set; }
 
     }
 
@@ -46,7 +47,7 @@ namespace WebApp.Models
         public int IdProducto { get; set; }
         public Producto Producto { get; set; }
 
-
+        
     }
 
 
