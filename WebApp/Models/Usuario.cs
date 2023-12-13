@@ -8,7 +8,7 @@ namespace WebApp.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string Rol { get; set; }
-        public string isBlocked { get; set; }
+        public bool isBlocked { get; set; }
         public string ProfileImg { get; set; }
         
         public byte[] PasswordHash { get; set; }

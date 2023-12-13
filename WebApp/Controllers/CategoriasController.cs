@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using System.Runtime.CompilerServices;
 using WebApp.Models;
 
 namespace WebApp.Controllers
 {
+    [Authorize(Roles = "SuperAdministrador, Administrador")]
     public class CategoriasController : Controller
     {
         private readonly AppDbContext db;

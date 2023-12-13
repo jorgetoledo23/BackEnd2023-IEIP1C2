@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+@{
+    var Rol = User.FindFirst(ClaimTypes.Role).Value;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -21,24 +26,33 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Categorias" asp-action="Index">Categorias</a>
                         </li>
                          <li class="nav-item">
                            <a class="nav-link text-dark" asp-area="" asp-controller="Productos" asp-action="Index">Productos</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Administracion de Usuarios</a>
-                        </li>
+
                     </ul>
+                </div>
+                <div class="d-flex">
+
+                    <div class="dropdown">
+                        <button class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle mx-2"></i>
+                            @User.Identity.Name
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle mx-2"></i>Ver Perfil</a></li>
+                            @if(Rol.Equals("SuperAdministrador") || Rol.Equals("Administrador")){
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-person-gear mx-2"></i>Gestion Usuarios</a></li>
+                            }
+                            
+                            <li><a class="dropdown-item" asp-controller="Auth" asp-action="LogOut"><i class="bi bi-box-arrow-left mx-2"></i>Cerrar Sesion</a></li>
+                        </ul>
+                    </div>
+
+
+
                 </div>
             </div>
         </nav>

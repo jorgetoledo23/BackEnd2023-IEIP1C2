@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Models;
 
 namespace WebApp.Controllers
 {
+    [Authorize(Roles = "SuperAdministrador, Administrador")]
     public class ProductosController : Controller
     {
         private readonly AppDbContext db;
